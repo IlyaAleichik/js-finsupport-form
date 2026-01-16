@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" type="text/css"
+        href="http://yui.yahooapis.com/3.11.0/build/cssnormalize/cssnormalize-min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div>
+
+        <div class="popup1">
+            <!-- <a class="close" href="#">×</a> -->
+            <div class="content">
+
+                <div>
+                    <button class="open-modal-btn" id="openModalBtn" type="button">Подобрать программу
+                        финансирования</button>
+                </div>
+
+                <!-- Модальное окно -->
+                <div class="modal-overlay" id="modalOverlay" lang="ru-RU" dir="ltr">
+
+
+                    <div class="modal">
+                        <div class="modal-header">
+                            <button class="close-btn" id="closeModelBtn">&times;</button>
+                        </div>
+
+                        <form action="/ispolcom/" method="post" class="modal-form init" aria-label="Контактная форма"
+                            novalidate="novalidate" data-status="init">
+
+                            <h1>Форма для подбора программы финанасирования</h1>
+
+                            <h4>
+                                Пожалуйста, заполните поля формы*
+                            </h4>
+
+                            <p><label>Название компании<br>
+                                    <span class="wpcf7-form-control-wrap" data-name="your-name"><input size="40"
+                                            maxlength="400" placeholder="ОАО Лифтмаш"
+                                            class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required"
+                                            autocomplete="name" aria-required="true" aria-invalid="false" value=""
+                                            type="text" name="your-name"></span> </label>
+                            </p>
+                            <p><label>Количество работников<br>
+                                    <span class="wpcf7-form-control-wrap" data-name="your-email"><input size="40"
+                                            maxlength="400" placeholder="Значения от 3 до 1000"
+                                            class="wpcf7-form-control wpcf7-email wpcf7-validates-as-required wpcf7-text wpcf7-validates-as-email"
+                                            autocomplete="email" aria-required="true" aria-invalid="false" value=""
+                                            type="email" name="your-email"></span> </label>
+                            </p>
+                            <p><label>Сумма финансирования<br>
+                                    <span class="wpcf7-form-control-wrap" data-name="your-message">
+                                        <input type="text" pattern="^\d*(\.\d{0,2})?$" placeholder="0.00"
+                                            title="Сумма в валюте (например, 123.45)" />
+                                    </span>
+                                </label>
+                            </p>
+                            <p><label>Вид деятельности по проекту<br>
+                                    <span class="wpcf7-form-control-wrap" data-name="your-message"><input
+                                            placeholder="XXXXXX Вид деятельности" cols="40" rows="10" maxlength="2000"
+                                            class="wpcf7-form-control wpcf7-input" aria-invalid="false"
+                                            name="your-message"></input></span> </label>
+                            </p>
+                            <p><label>Контактный телефон<br>
+                                    <span class="wpcf7-form-control-wrap" data-name="your-message">
+                                        <input type="tel" placeholder="+375 (XX) XXX-XX-XX">
+                                    </span> </label>
+                            </p>
+
+                            <p>
+                            <div class="email-input-container">
+                                <label for="email-local" style="display: block; margin-bottom: 8px; font-weight: bold;">
+                                    Email адрес
+                                </label>
+
+                                <div class="email-wrapper">
+                                    <input type="text" id="email-local" placeholder="username" autocomplete="off">
+
+                                    <div class="domain-selector-wrapper" id="domain-wrapper">
+                                        <span class="at-symbol">@</span>
+                                        <select id="domain-selector">
+                                            <option value="">выберите домен</option>
+                                            <option value="gmail.com">gmail.com</option>
+                                            <option value="yandex.ru">yandex.ru</option>
+                                            <option value="mail.ru">mail.ru</option>
+                                            <option value="outlook.com">outlook.com</option>
+                                            <option value="yahoo.com">yahoo.com</option>
+                                            <option value="icloud.com">icloud.com</option>
+                                            <option value="custom">другой...</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Скрытое поле для полного email -->
+                                <input type="email" id="email-full" name="email" required>
+
+                                <div class="hint" id="hint">
+                                    Начните вводить email полностью, чтобы скрыть селектор
+                                </div>
+                            </div>
+                            </p>
+
+                            <p><label>Район реализации проекта<br>
+                                    <span class="wpcf7-form-control-wrap" data-name="your-message">
+                                        <select id="phone" name="phone">
+                                            <option value="Минский">Минский</option>
+                                            <option value="Гомельский">Гомельский</option>
+                                            <option value="Могилевский">Могилевский</option>
+                                            <option value="Витебский">Витебский</option>
+                                        </select>
+                                    </span>
+                                </label>
+                            </p>
+
+                            <p><input class="btn-submit wpcf7-form-control wpcf7-submit has-spinner" type="submit"
+                                    value="Отправить">
+                            </p>
+
+                            <div class="wpcf7-response-output" aria-hidden="true"></div>
+                        </form>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const openModalBtn = document.getElementById('openModalBtn');
+        const modalOverlay = document.getElementById('modalOverlay');
+        const closeModalBtn = document.getElementById('closeModelBtn');
+
+
+
+
+
+
+        
+        openModalBtn.addEventListener('click', function () {
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Блокируем прокрутку страницы
+        })
+
+        closeModalBtn.addEventListener('click', function () {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Блокируем прокрутку страницы
+        })
+
+
+
+        const emailLocal = document.getElementById('email-local');
+        const domainSelector = document.getElementById('domain-selector');
+        const domainWrapper = document.getElementById('domain-wrapper');
+        const emailFull = document.getElementById('email-full');
+        const hint = document.getElementById('hint');
+
+        let isManualInput = false;
+        let lastManualValue = '';
+
+        // Инициализация
+        function initEmailInput() {
+            updateFullEmail();
+            setupEventListeners();
+        }
+
+        function setupEventListeners() {
+            // События для локальной части email
+            emailLocal.addEventListener('input', function (e) {
+                const value = e.target.value;
+
+                // Проверяем, содержит ли ввод символ @
+                if (value.includes('@')) {
+                    if (!isManualInput) {
+                        isManualInput = true;
+                        domainWrapper.style.opacity = '0.5';
+                        hint.classList.add('visible');
+                    }
+
+                    // Разделяем на локальную часть и домен
+                    const parts = value.split('@');
+                    if (parts.length >= 2) {
+                        emailLocal.value = parts[0];
+                        const domain = parts.slice(1).join('@');
+
+                        // Проверяем, есть ли домен в селекторе
+                        const option = Array.from(domainSelector.options)
+                            .find(opt => opt.value === domain);
+
+                        if (option) {
+                            domainSelector.value = domain;
+                        } else {
+                            domainSelector.value = 'custom';
+                        }
+                    }
+                }
+
+                updateFullEmail();
+            });
+
+            emailLocal.addEventListener('keydown', function (e) {
+                // При вводе с клавиатуры показываем подсказку
+                if (!isManualInput && e.key.length === 1 && !e.ctrlKey && !e.metaKey) {
+                    isManualInput = true;
+                    domainWrapper.style.opacity = '0.5';
+                    hint.classList.add('visible');
+                }
+            });
+
+            emailLocal.addEventListener('focus', function () {
+                if (!emailLocal.value && !isManualInput) {
+                    hint.classList.add('visible');
+                }
+            });
+
+            emailLocal.addEventListener('blur', function () {
+                // Если поле пустое, сбрасываем состояние
+                if (!emailLocal.value) {
+                    isManualInput = false;
+                    domainWrapper.style.opacity = '1';
+                    hint.classList.remove('visible');
+                    domainSelector.value = '';
+                }
+            });
+
+            // События для селектора домена
+            domainSelector.addEventListener('change', function () {
+                if (domainSelector.value === 'custom' && !isManualInput) {
+                    isManualInput = true;
+                    hint.classList.add('visible');
+                }
+                updateFullEmail();
+
+                // Фокус на поле ввода для продолжения ввода
+                if (domainSelector.value === 'custom') {
+                    emailLocal.focus();
+                }
+            });
+
+            // Валидация при отправке формы
+            document.addEventListener('DOMContentLoaded', function () {
+                const form = document.querySelector('form');
+                if (form) {
+                    form.addEventListener('submit', function (e) {
+                        if (!validateEmail()) {
+                            e.preventDefault();
+                            alert('Пожалуйста, введите корректный email адрес');
+                        }
+                    });
+                }
+            });
+        }
+
+        function updateFullEmail() {
+            const localPart = emailLocal.value.trim();
+            const domain = domainSelector.value;
+
+            if (localPart && domain && domain !== 'custom') {
+                emailFull.value = localPart + '@' + domain;
+            } else if (isManualInput && localPart.includes('@')) {
+                emailFull.value = localPart;
+            } else {
+                emailFull.value = '';
+            }
+        }
+
+        function validateEmail() {
+            const email = emailFull.value;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // Автодополнение популярных доменов
+        emailLocal.addEventListener('input', function () {
+            if (!isManualInput && emailLocal.value) {
+                // Можно добавить логику автодополнения
+                const popularDomains = ['gmail.com', 'yandex.ru', 'mail.ru'];
+                // Здесь можно реализовать подсказки
+            }
+        });
+
+        // Инициализация при загрузке
+        window.addEventListener('DOMContentLoaded', initEmailInput);
+
+
+    </script>
+</body>
+
+</html>
