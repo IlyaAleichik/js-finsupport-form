@@ -20,11 +20,14 @@
 
 .modal-header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 25px 30px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  /* position: fixed; */
+  margin: 20px;
+  /* left: 77%; */
+  /* justify-content: space-between; */
+  /* align-items: center; */
+  /* padding: 10px 20px; */
+  /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+  color: rgb(0, 0, 0);
 }
 
 /* Modal Window */
@@ -45,7 +48,8 @@
 
 /* Само модальное окно */
 .modal {
-  overflow: hidden;
+  overflow: auto;
+  height: 90%;
   background: white;
   border-radius: 15px;
   width: 90%;
@@ -75,7 +79,7 @@
 .close-btn {
   background: none;
   border: none;
-  color: white;
+  /* color: white; */
   font-size: 32px;
   cursor: pointer;
   line-height: 1;
@@ -93,6 +97,7 @@
 }
 
 .btn-submit {
+  margin: 20px 00px;
   font-size: larger;
   padding: 16px 44px;
   border: none;
@@ -103,17 +108,15 @@
 }
 
 .modal-form {
-  padding: 20px;
+ padding: 0px 20px;
 }
-
-
 
 /* Ввод email с селектором домена */
 
 .email-input-container {
   position: relative;
   max-width: 400px;
-  margin: 20px;
+  margin: 0px 0px 10px;
 }
 
 .email-wrapper {
@@ -141,7 +144,9 @@
   display: flex;
   border-left: 1px solid #ddd;
   background: #f8f9fa;
-  transition: opacity 0.3s, width 0.3s;
+  transition:
+    opacity 0.3s,
+    width 0.3s;
   overflow: hidden;
   white-space: nowrap;
 }
@@ -190,4 +195,43 @@
     border-left: none;
     border-top: 1px solid #ddd;
   }
+}
+
+/* Inputs */
+.input-container {
+  position: relative;
+  max-width: 400px;
+  margin: 0px 0px 10px;
+}
+
+.input-wrapper {
+  display: flex;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+
+.input-wrapper:focus-within {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+#input-local {
+  flex: 1;
+  border: none;
+  padding: 12px 16px;
+  font-size: 16px;
+  outline: none;
+}
+#project-selector {
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 12px 16px 12px 8px;
+  font-size: 16px;
+  outline: none;
+  min-width: 120px;
+  cursor: pointer;
+  color: #333;
 }
